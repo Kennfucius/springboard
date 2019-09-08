@@ -1,0 +1,1958 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Capstone 2 - Predicting Water Pump Condition EDA}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Capstone 2 - Predicting Water Pump Condition in Tanzania
+EDA}\label{capstone-2---predicting-water-pump-condition-in-tanzania-eda}
+
+    Kenneth Liao
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{Background}\label{background}
+
+    The UN publishes and reviews a list of least developed countries (LDC)
+every 3 years. LDCs are ``low-income countries confronting severe
+structural impediments to sustainable development. They are highly
+vulnerable to economic and environmental shocks and have low levels of
+human assets.''\(^{1}\). Tanzania has been classified as an LDC since
+the UN published the first list of LDCs in 1971\(^{2}\). A common
+challenge of LDCs is a lack of infrastructure to support the development
+of the nation, including access to education and healthcare, waste
+management, and access to potable water.
+
+According to UNICEF, as of 2017, more than 24 million Tanzanians lacked
+access to basic drinking water\(^{3}\). This corresponds to only 56.7\%
+of the country's population having access to basic drinking water.
+Outside of developed urban areas, much of the potable water is accessed
+via water pumps.
+
+Taarifa is an open-source platform for crowd-sourced reporting and
+triaging of infrastructure related issues. Together with the Tanzanian
+Ministry of Water, data has been collected for thousands of water pumps
+throughout Tanzania. The goal of this project is to be able to predict
+the condition of these water pumps to improve maintenance, reduce pump
+downtime, and ensure basic water access for millions of Tanzanians.
+
+    \textbf{References}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  https://www.un.org/development/desa/dpad/least-developed-country-category.html
+\item
+  https://www.un.org/development/desa/dpad/wp-content/uploads/sites/45/publication/ldc\_list.pdf
+\item
+  https://washwatch.org/en/countries/tanzania/summary/statistics/
+\end{enumerate}
+
+    \subsubsection{Problem Description}\label{problem-description}
+
+    Predict the operating condition of water pumps in Tanzania given various
+metadata on each water pump.
+
+    \subsubsection{Strategy}\label{strategy}
+
+    The strategy will be to implement an XGBoost model as well as a neural
+network model for predictions and compare their performance.
+
+    \subsubsection{Data}\label{data}
+
+    The dataset is provided by Taarifa, together with the Tanzanian Ministry
+of Water and is hosted by DrivenData.org:
+
+https://www.drivendata.org/competitions/7/pump-it-up-data-mining-the-water-table/page/23/
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{Exploratory Data Analysis}\label{exploratory-data-analysis}
+
+    Start by importing the necessary libraries and datasets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+        \PY{k+kn}{from} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{offline} \PY{k}{import} \PY{n}{iplot}\PY{p}{,} \PY{n}{plot}\PY{p}{,} \PY{n}{init\PYZus{}notebook\PYZus{}mode}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{express} \PY{k}{as} \PY{n+nn}{px}
+        \PY{k+kn}{from} \PY{n+nn}{config} \PY{k}{import} \PY{n}{credentials}
+        
+        \PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{(}\PY{n}{connected}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} load the data}
+        \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{train\PYZus{}labels} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/train\PYZhy{}labels.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{Prediction Labels}\label{prediction-labels}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{train\PYZus{}labels}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} (59400, 2)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{train\PYZus{}labels}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}       id    status\_group
+        0  69572      functional
+        1   8776      functional
+        2  34310      functional
+        3  67743  non functional
+        4  19728      functional
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{train\PYZus{}labels}\PY{o}{.}\PY{n}{id}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 59400
+\end{Verbatim}
+            
+    The train\_labels file contains the labels we want to predict,
+\texttt{status\_group}. This is the condition of a given water pump.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{counts} \PY{o}{=} \PY{n}{train\PYZus{}labels}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{status\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        \PY{n}{counts}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}                             id
+        status\_group                  
+        functional               32259
+        functional needs repair   4317
+        non functional           22824
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{trace0} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{functional}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{functional}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{n}{counts}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{functional}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lightgreen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+        \PY{n}{trace1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{functional needs repair}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{functional needs repair}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{n}{counts}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{functional needs repair}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+        \PY{n}{trace2} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{non functional}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{non functional}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{p}{[}\PY{n}{counts}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{non functional}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+                       \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tomato}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{showlegend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+        
+        \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pump Condition Distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{p}{[}\PY{n}{trace0}\PY{p}{,} \PY{n}{trace1}\PY{p}{,} \PY{n}{trace2}\PY{p}{]}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+        
+        \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pump\PYZhy{}conditions.html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{counts}\PY{o}{/}\PY{n}{counts}\PY{o}{.}\PY{n}{id}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:}                                id
+        status\_group                     
+        functional               0.543081
+        functional needs repair  0.072677
+        non functional           0.384242
+\end{Verbatim}
+            
+    54.3\% of pumps are functional, while 7.3\% are functional but require
+repair and 38.4\% are non functional.
+
+    \subsubsection{Features}\label{features}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{train} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}        amount\_tsh date\_recorded        funder  gps\_height     installer  \textbackslash{}
+        id                                                                        
+        69572      6000.0    2011-03-14         Roman        1390         Roman   
+        8776          0.0    2013-03-06       Grumeti        1399       GRUMETI   
+        34310        25.0    2013-02-25  Lottery Club         686  World vision   
+        67743         0.0    2013-01-28        Unicef         263        UNICEF   
+        19728         0.0    2011-07-13   Action In A           0       Artisan   
+        
+               longitude   latitude              wpt\_name  num\_private  \textbackslash{}
+        id                                                               
+        69572  34.938093  -9.856322                  none            0   
+        8776   34.698766  -2.147466              Zahanati            0   
+        34310  37.460664  -3.821329           Kwa Mahundi            0   
+        67743  38.486161 -11.155298  Zahanati Ya Nanyumbu            0   
+        19728  31.130847  -1.825359               Shuleni            0   
+        
+                                 basin          {\ldots}          payment\_type  \textbackslash{}
+        id                                      {\ldots}                         
+        69572               Lake Nyasa          {\ldots}              annually   
+        8776             Lake Victoria          {\ldots}             never pay   
+        34310                  Pangani          {\ldots}            per bucket   
+        67743  Ruvuma / Southern Coast          {\ldots}             never pay   
+        19728            Lake Victoria          {\ldots}             never pay   
+        
+              water\_quality  quality\_group      quantity quantity\_group  \textbackslash{}
+        id                                                                
+        69572          soft           good        enough         enough   
+        8776           soft           good  insufficient   insufficient   
+        34310          soft           good        enough         enough   
+        67743          soft           good           dry            dry   
+        19728          soft           good      seasonal       seasonal   
+        
+                             source           source\_type source\_class  \textbackslash{}
+        id                                                               
+        69572                spring                spring  groundwater   
+        8776   rainwater harvesting  rainwater harvesting      surface   
+        34310                   dam                   dam      surface   
+        67743           machine dbh              borehole  groundwater   
+        19728  rainwater harvesting  rainwater harvesting      surface   
+        
+                           waterpoint\_type waterpoint\_type\_group  
+        id                                                        
+        69572           communal standpipe    communal standpipe  
+        8776            communal standpipe    communal standpipe  
+        34310  communal standpipe multiple    communal standpipe  
+        67743  communal standpipe multiple    communal standpipe  
+        19728           communal standpipe    communal standpipe  
+        
+        [5 rows x 39 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} (59400, 39)
+\end{Verbatim}
+            
+    The shape of the full feature data is (59400,39). Having more than 2
+orders of magnitude worth of samples compared to the number of features
+will help avoid the curse of dimensionality. The concern would be with
+the label with the smallest sample size. The data for the condition
+"functional needs repair" is (4317, 39). In thise case, the number of
+samples is still 2 orders of magnitude larger than the number of
+features.
+
+    The preview above shows that the training data contains 39 features with
+mixed datatypes. The descriptions of each feature are described below,
+from the data source.
+
+    \texttt{amount\_tsh} - Total static head (amount water available to
+waterpoint) \texttt{date\_recorded} - The date the row was entered
+\texttt{funder} - Who funded the well \texttt{gps\_height} - Altitude of
+the well \texttt{installer} - Organization that installed the well
+\texttt{longitude} - GPS coordinate \texttt{latitude} - GPS coordinate
+\texttt{wpt\_name} - Name of the waterpoint if there is one
+\texttt{num\_private} - \texttt{basin} - Geographic water basin
+\texttt{subvillage} - Geographic location \texttt{region} - Geographic
+location \texttt{region\_code} - Geographic location (coded)
+\texttt{district\_code} - Geographic location (coded) \texttt{lga} -
+Geographic location \texttt{ward} - Geographic location
+\texttt{population} - Population around the well
+\texttt{public\_meeting} - True/False \texttt{recorded\_by} - Group
+entering this row of data \texttt{scheme\_management} - Who operates the
+waterpoint \texttt{scheme\_name} - Who operates the waterpoint
+\texttt{permit} - If the waterpoint is permitted
+\texttt{construction\_year} - Year the waterpoint was constructed
+\texttt{extraction\_type} - The kind of extraction the waterpoint uses
+\texttt{extraction\_type\_group} - The kind of extraction the waterpoint
+uses \texttt{extraction\_type\_class} - The kind of extraction the
+waterpoint uses \texttt{management} - How the waterpoint is managed
+\texttt{management\_group} - How the waterpoint is managed
+\texttt{payment} - What the water costs \texttt{payment\_type} - What
+the water costs \texttt{water\_quality} - The quality of the water
+\texttt{quality\_group} - The quality of the water \texttt{quantity} -
+The quantity of water \texttt{quantity\_group} - The quantity of water
+\texttt{source} - The source of the water \texttt{source\_type} - The
+source of the water \texttt{source\_class} - The source of the water
+\texttt{waterpoint\_type} - The kind of waterpoint
+\texttt{waterpoint\_type\_group} - The kind of waterpoint
+
+    Some of the feature descriptions look very similar to each other. I will
+be checking if there are duplicate features, or if some of the features
+are derived from others, this will help reduce the number of features to
+just the essential ones.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{k}{def} \PY{n+nf}{data\PYZus{}check}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{col}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{There are }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ null values.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{There are }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ unique values.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{col}\PY{p}{,} \PY{n}{ylog}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{xlog}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{if} \PY{n}{ylog}\PY{p}{:}
+                 \PY{n}{ymode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{ymode}\PY{o}{=}\PY{k+kc}{None}
+             \PY{k}{if} \PY{n}{xlog}\PY{p}{:}
+                 \PY{n}{xmode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{xmode}\PY{o}{=}\PY{k+kc}{None}
+             
+             \PY{n}{trace} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Histogram}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s1}{ Distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{o}{=}\PY{n}{ymode}\PY{p}{)}\PY{p}{,}
+                                \PY{n}{xaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{type}\PY{o}{=}\PY{n}{xmode}\PY{p}{)}\PY{p}{)}
+                 
+             \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{p}{[}\PY{n}{trace}\PY{p}{]}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+             
+             \PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}col\PYZcb{}}\PY{l+s+s1}{\PYZhy{}dist.html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{amount\_tsh}\label{amount_tsh}
+
+    \texttt{amount\_tsh} is the "total static head" of the pump, described
+as the total amount of water available to the waterpoint. Total static
+head is the distance from the surface of the water source to the surface
+where the water is collected from the pump. It is related to the
+pressure of the water source and therefore the amount of water present.
+The distribution of \texttt{amount\_tsh} is shown below on a semi-log
+plot. Most of the pumps are near 0 total static head.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{amount\PYZus{}tsh}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylog}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{train}\PY{o}{.}\PY{n}{amount\PYZus{}tsh}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 0.0       41639
+         500.0      3102
+         50.0       2472
+         1000.0     1488
+         20.0       1463
+         Name: amount\_tsh, dtype: int64
+\end{Verbatim}
+            
+    The top 5 value counts for \texttt{amount\_tsh} are summarized above.
+41,639 of the 59,400 pumps have a total static head of 0. This implies
+the water source is at the surface.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{train}\PY{o}{.}\PY{n}{amount\PYZus{}tsh}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} False
+\end{Verbatim}
+            
+    There are no null values in this feature column!
+
+    \paragraph{date\_recorded}\label{date_recorded}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{train}\PY{o}{.}\PY{n}{date\PYZus{}recorded}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} False
+\end{Verbatim}
+            
+    The \texttt{date\_recorded} column also has no missing values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    The first date we have a record for is 2002-10-14. The data is very
+sparse prior to 2011. If we zoom in to Jan 2011 and beyond, there appear
+to be 4 periods of heavy data collection. After April 2013, there also
+appears to be some more regular data collection each month, on about
+200-300 pumps at a time.
+
+    \paragraph{funder}\label{funder}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{funder}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 3635  null values.
+There are 1897  unique values.
+
+    \end{Verbatim}
+
+    3,635 of the 59,400 samples are missing their funding source. I can't
+imagine how the funding source would be related to a pump failing or not
+so I think it's safe to drop this column.
+
+    \paragraph{gps\_height}\label{gps_height}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gps\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{train}\PY{o}{.}\PY{n}{gps\PYZus{}height}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} False
+\end{Verbatim}
+            
+    The \texttt{gps\_height} is the altitude of the water pump. Luckily,
+there are no missing data in this column.
+
+    \paragraph{installer}\label{installer}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{installer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 3655  null values.
+There are 2145  unique values.
+
+    \end{Verbatim}
+
+    There are 2,145 unique installers. Unfortunately, there are also 3,655
+missing values for \texttt{installer}. This feature can affect water
+pump condition if for example, the quality of the installation varies
+between installers.
+
+    \paragraph{latitude, longitude}\label{latitude-longitude}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 57517  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 57516  unique values.
+
+    \end{Verbatim}
+
+    No missing values for latitude or longitude!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{px}\PY{o}{.}\PY{n}{set\PYZus{}mapbox\PYZus{}access\PYZus{}token}\PY{p}{(}\PY{n}{credentials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mapbox\PYZus{}token}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{px}\PY{o}{.}\PY{n}{scatter\PYZus{}mapbox}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{lat}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lon}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                 \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gps\PYZus{}height}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{n}{size\PYZus{}max}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{zoom}\PY{o}{=}\PY{l+m+mf}{4.5}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    The map above shows the locations of the pumps with a color gradient
+showing the altitude of each pump (\texttt{gps\_height}). The pumps are
+mostly in concentrated areas but there are some small groups of
+dispersed pump sites.
+
+    \paragraph{wpt\_name}\label{wpt_name}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wpt\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 37400  unique values.
+
+    \end{Verbatim}
+
+    The \texttt{wpt\_name} is simply the name of the water point.
+Interestingly, every waterpoint has a name, there are no null values.
+There are 37,400 unique names while we have 59,400 water points, so
+waterpoints can have duplicate names. Below are 20 sample names.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{train}\PY{o}{.}\PY{n}{wpt\PYZus{}name}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{20}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} array(['none', 'Zahanati', 'Kwa Mahundi', 'Zahanati Ya Nanyumbu',
+                'Shuleni', 'Tajiri', 'Kwa Ngomho', 'Tushirikiane',
+                'Kwa Ramadhan Musa', 'Kwapeto', 'Mzee Hokororo',
+                'Kwa Alid Nchimbi', 'Pamba', 'Kwa John Izack Mmari', 'Mwabasabi',
+                "Kwa Juvenal Ching'Ombe", 'Kwa John Mtenzi', 'Kwa Rose Chaula',
+                'Ngomee', 'Muungano'], dtype=object)
+\end{Verbatim}
+            
+    \paragraph{num\_private}\label{num_private}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}private}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 65  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{train}\PY{o}{.}\PY{n}{num\PYZus{}private}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} 0       58643
+         6          81
+         1          73
+         5          46
+         8          46
+         32         40
+         45         36
+         15         35
+         39         30
+         93         28
+         3          27
+         7          26
+         2          23
+         65         22
+         47         21
+         102        20
+         4          20
+         17         17
+         80         15
+         20         14
+         25         12
+         11         11
+         41         10
+         34         10
+         16          8
+         120         7
+         150         6
+         22          6
+         12          5
+         24          5
+                 {\ldots}  
+         14          3
+         61          3
+         27          2
+         26          2
+         160         1
+         30          1
+         698         1
+         60          1
+         1402        1
+         450         1
+         668         1
+         131         1
+         35          1
+         672         1
+         42          1
+         136         1
+         87          1
+         300         1
+         280         1
+         141         1
+         62          1
+         111         1
+         240         1
+         1776        1
+         755         1
+         180         1
+         213         1
+         23          1
+         55          1
+         94          1
+         Name: num\_private, Length: 65, dtype: int64
+\end{Verbatim}
+            
+    Unfortunately, there is no description of \texttt{num\_private}. There
+are 65 unique values for this feature with no m issing data. The vast
+majority of samples however have a value of 0 for this feature, 58,643
+out of 59,400 have a value of 0.
+
+    \paragraph{basin}\label{basin}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{basin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 9  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{basin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \texttt{basin} refers to the water basin for the water source. The water
+basin with the most water pumps is Lake Victoria and the one with the
+least is Lake Rukwa. Below we can visualize the distribution of
+waterpumps according to which basin they draw water from. Lake Victoria
+is at the very North end of Tanzania, and we can see all of the
+neighboring waterpoints that access it.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{px}\PY{o}{.}\PY{n}{set\PYZus{}mapbox\PYZus{}access\PYZus{}token}\PY{p}{(}\PY{n}{credentials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mapbox\PYZus{}token}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{px}\PY{o}{.}\PY{n}{scatter\PYZus{}mapbox}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{lat}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lon}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                 \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{basin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{n}{size\PYZus{}max}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{zoom}\PY{o}{=}\PY{l+m+mf}{4.5}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{subvillage}\label{subvillage}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{subvillage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 371  null values.
+There are 19287  unique values.
+
+    \end{Verbatim}
+
+    There are 19,287 unique subvillages with 371 missing values.
+
+    \paragraph{region}\label{region}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 21  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    There are 21 unique regions with 0 missing values. We can see how there
+are multiple regions that draw from the same basins.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{px}\PY{o}{.}\PY{n}{set\PYZus{}mapbox\PYZus{}access\PYZus{}token}\PY{p}{(}\PY{n}{credentials}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mapbox\PYZus{}token}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{px}\PY{o}{.}\PY{n}{scatter\PYZus{}mapbox}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{lat}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lon}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                 \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                 \PY{n}{size\PYZus{}max}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{zoom}\PY{o}{=}\PY{l+m+mf}{4.5}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{region\_code}\label{region_code}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 27  unique values.
+
+    \end{Verbatim}
+
+    There are actually 27 unique \texttt{region\_codes} which is unexpected.
+Let's see how they are mapped to region names.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:}                            date\_recorded
+         region        region\_code               
+         Arusha        2                     3024
+                       24                     326
+         Dar es Salaam 7                      805
+         Dodoma        1                     2201
+         Iringa        11                    5294
+         Kagera        18                    3316
+         Kigoma        16                    2816
+         Kilimanjaro   3                     4379
+         Lindi         8                      300
+                       18                       8
+                       80                    1238
+         Manyara       21                    1583
+         Mara          20                    1969
+         Mbeya         12                    4639
+         Morogoro      5                     4006
+         Mtwara        9                      390
+                       90                     917
+                       99                     423
+         Mwanza        17                      55
+                       19                    3047
+         Pwani         6                     1609
+                       40                       1
+                       60                    1025
+         Rukwa         15                    1808
+         Ruvuma        10                    2640
+         Shinyanga     11                       6
+                       14                      20
+                       17                    4956
+         Singida       13                    2093
+         Tabora        14                    1959
+         Tanga         4                     2513
+                       5                       34
+\end{Verbatim}
+            
+    So a given region can have multiple region codes. region\_codes are not
+completely unique across regions. Notice that region 5 appears both for
+the Tanga region and Morogoro.
+
+    \paragraph{district code}\label{district-code}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{district\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 20  unique values.
+
+    \end{Verbatim}
+
+    There are 20 unique district codes with no missing values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{district\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{district\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:}                            date\_recorded
+         region\_code district\_code               
+         1           0                         23
+                     1                        888
+                     3                        361
+                     4                        347
+                     5                        358
+                     6                        224
+         2           1                        189
+                     2                       1206
+                     3                        109
+                     5                        201
+                     6                        310
+                     7                       1009
+         3           1                        595
+                     2                        519
+                     3                        877
+                     4                       1225
+                     5                        620
+                     6                        109
+                     7                        434
+         4           1                        698
+                     2                        408
+                     3                        323
+                     4                        110
+                     5                        293
+                     6                        266
+                     7                        127
+                     8                        288
+         5           1                       1128
+                     2                        521
+                     3                        997
+         {\ldots}                                  {\ldots}
+         19          5                        332
+                     6                        488
+                     7                        347
+                     8                        132
+         20          1                        171
+                     2                        716
+                     3                        396
+                     4                        438
+                     6                        248
+         21          1                        550
+                     2                        274
+                     3                        297
+                     4                        276
+                     5                        186
+         24          30                       326
+         40          43                         1
+         60          33                       115
+                     43                       350
+                     53                       454
+                     60                        63
+                     63                        37
+                     67                         6
+         80          13                       391
+                     23                       293
+                     43                       154
+                     53                       291
+                     62                       109
+         90          33                       759
+                     63                       158
+         99          1                        423
+         
+         [130 rows x 1 columns]
+\end{Verbatim}
+            
+    The groupby table above shows that for each region\_code, there can be
+multiple districts. The district codes are not unique between regions.
+
+    \paragraph{lga}\label{lga}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lga}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 125  unique values.
+
+    \end{Verbatim}
+
+    \texttt{lga} has 125 unique values with no missing data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{district\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lga}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{region\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lga}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{district\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:}                                         date\_recorded
+         region\_code lga          district\_code               
+         1           Bahi         6                        224
+                     Chamwino     4                        347
+                     Dodoma Urban 5                        358
+                     Kondoa       1                        523
+                     Kongwa       3                        361
+                     Mpwapwa      0                         23
+                                  1                        365
+         2           Arusha Rural 2                       1206
+                                  3                         46
+                     Arusha Urban 3                         63
+                     Longido      6                        310
+                     Meru         7                       1009
+                     Monduli      1                        189
+                     Ngorongoro   5                        201
+         3           Hai          5                        617
+                                  6                          8
+                     Moshi Rural  1                          7
+                                  4                       1219
+                                  5                          3
+                                  6                         22
+                     Moshi Urban  6                         79
+                     Mwanga       2                        519
+                     Rombo        1                        588
+                                  4                          6
+                     Same         3                        877
+                     Siha         7                        434
+         4           Handeni      6                        254
+                     Kilindi      7                        127
+                     Korogwe      1                          4
+                                  2                        408
+         {\ldots}                                               {\ldots}
+         20          Musoma Rural 3                        396
+                     Rorya        6                        210
+                     Serengeti    2                        716
+                     Tarime       1                        171
+                                  6                         38
+         21          Babati       1                        511
+                     Hanang       2                        274
+                     Kiteto       4                          7
+                                  5                        186
+                     Mbulu        3                        297
+                     Simanjiro    1                         39
+                                  4                        269
+         24          Karatu       30                       326
+         40          Mkuranga     43                         1
+         60          Kisarawe     33                       115
+                     Mafia        60                        63
+                                  63                        37
+                                  67                         6
+                     Mkuranga     43                       350
+                     Rufiji       53                       454
+         80          Kilwa        13                       391
+                     Lindi Rural  23                       293
+                                  62                        88
+                     Lindi Urban  62                        21
+                     Liwale       43                       154
+                     Ruangwa      53                       291
+         90          Masasi       33                       528
+                     Nanyumbu     63                       158
+                     Newala       33                       231
+         99          Mtwara Rural 1                        423
+         
+         [176 rows x 1 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lga}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{ward}\label{ward}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ward}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 2092  unique values.
+
+    \end{Verbatim}
+
+    \texttt{ward} has 2092 unique values with no missing data.
+
+    \paragraph{population}\label{population}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 1049  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ylog}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    There are 1049 unique values of \texttt{population} with 0 missing data.
+This number is different than the unique number of water pumps,
+suggesting that multiple pumps can serve the same population, or there
+are multiple populations with the same number of people.
+
+    \paragraph{public meeting}\label{public-meeting}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{public\PYZus{}meeting}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 3334  null values.
+There are 2  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{train}\PY{o}{.}\PY{n}{public\PYZus{}meeting}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:} True     51011
+          False     5055
+          Name: public\_meeting, dtype: int64
+\end{Verbatim}
+            
+    \texttt{public\_meeting} is a binary feature. 3,334 values are missing
+for this feature.
+
+    No description is provided for this feature.
+
+    \paragraph{recorded\_by}\label{recorded_by}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recorded\PYZus{}by}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 1  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{train}\PY{o}{.}\PY{n}{recorded\PYZus{}by}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}111}]:} array(['GeoData Consultants Ltd'], dtype=object)
+\end{Verbatim}
+            
+    All of the data was recorded by GeoData Consultants. This value is the
+same for the entire dataset and thus can be dropped.
+
+    \paragraph{scheme\_management}\label{scheme_management}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scheme\PYZus{}management}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 3877  null values.
+There are 12  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scheme\PYZus{}management}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{scheme\_name}\label{scheme_name}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scheme\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 28166  null values.
+There are 2696  unique values.
+
+    \end{Verbatim}
+
+    \paragraph{permit}\label{permit}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{permit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 3056  null values.
+There are 2  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{n}{train}\PY{o}{.}\PY{n}{permit}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}117}]:} True     38852
+          False    17492
+          Name: permit, dtype: int64
+\end{Verbatim}
+            
+    \paragraph{construction\_year}\label{construction_year}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{construction\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 55  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{train}\PY{o}{.}\PY{n}{construction\PYZus{}year}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}121}]:} 0       20709
+          2010     2645
+          2008     2613
+          2009     2533
+          2000     2091
+          2007     1587
+          2006     1471
+          2003     1286
+          2011     1256
+          2004     1123
+          2012     1084
+          2002     1075
+          1978     1037
+          1995     1014
+          2005     1011
+          1999      979
+          1998      966
+          1990      954
+          1985      945
+          1980      811
+          1996      811
+          1984      779
+          1982      744
+          1994      738
+          1972      708
+          1974      676
+          1997      644
+          1992      640
+          1993      608
+          2001      540
+          1988      521
+          1983      488
+          1975      437
+          1986      434
+          1976      414
+          1970      411
+          1991      324
+          1989      316
+          1987      302
+          1981      238
+          1977      202
+          1979      192
+          1973      184
+          2013      176
+          1971      145
+          1960      102
+          1967       88
+          1963       85
+          1968       77
+          1969       59
+          1964       40
+          1962       30
+          1961       21
+          1965       19
+          1966       17
+          Name: construction\_year, dtype: int64
+\end{Verbatim}
+            
+    There are no null values for \texttt{construction\_year}, however 20,709
+of the waterpoints have a construction year of 0. This likely means that
+the year of construction year is not known for the water pump.
+
+    \paragraph{extraction\_type}\label{extraction_type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 18  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    There are 18 unique extraction types with no missing data. The most
+common is the gravity extraction type with 26,780 water pumps of this
+type.
+
+    \paragraph{extraction\_type\_group}\label{extraction_type_group}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 13  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{extraction\_type\_class}\label{extraction_type_class}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 7  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extraction\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}131}]:}                                                                        date\_recorded
+          extraction\_type\_class extraction\_type\_group extraction\_type                         
+          gravity               gravity               gravity                            26780
+          handpump              afridev               afridev                             1770
+                                india mark ii         india mark ii                       2400
+                                india mark iii        india mark iii                        98
+                                nira/tanira           nira/tanira                         8154
+                                other handpump        other - mkulima/shinyanga              2
+                                                      other - play pump                     85
+                                                      other - swn 81                       229
+                                                      walimi                                48
+                                swn 80                swn 80                              3670
+          motorpump             mono                  mono                                2865
+                                other motorpump       cemo                                  90
+                                                      climax                                32
+          other                 other                 other                               6430
+          rope pump             rope pump             other - rope pump                    451
+          submersible           submersible           ksb                                 1415
+                                                      submersible                         4764
+          wind-powered          wind-powered          windmill                             117
+\end{Verbatim}
+            
+    The groupby above shows the breakdown from extraction class to group to
+type. Since class and group add no new information that's not already
+covered by \texttt{extraction\_type}, we can drop these two extra
+features.
+
+    \paragraph{management}\label{management}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 12  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{management\_group}\label{management_group}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 5  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{management}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}170}]:}                                    date\_recorded
+          management\_group management                     
+          commercial       company                     685
+                           private operator           1971
+                           trust                        78
+                           water authority             904
+          other            other                       844
+                           other - school               99
+          parastatal       parastatal                 1768
+          unknown          unknown                     561
+          user-group       vwc                       40507
+                           water board                2933
+                           wua                        2535
+                           wug                        6515
+\end{Verbatim}
+            
+    \paragraph{payment}\label{payment}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 7  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{payment\_type}\label{payment_type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 7  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{payment}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}142}]:}                                     date\_recorded
+          payment\_type payment                             
+          annually     pay annually                    3642
+          monthly      pay monthly                     8300
+          never pay    never pay                      25348
+          on failure   pay when scheme fails           3914
+          other        other                           1054
+          per bucket   pay per bucket                  8985
+          unknown      unknown                         8157
+\end{Verbatim}
+            
+    \texttt{payment\_type} and \texttt{payment} are duplicate columns. We
+can drop one of them.
+
+    \paragraph{water\_quality}\label{water_quality}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{water\PYZus{}quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 8  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{water\PYZus{}quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{quality\_group}\label{quality_group}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 6  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{water\PYZus{}quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{water\PYZus{}quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}149}]:}                                   date\_recorded
+          quality\_group water\_quality                    
+          colored       coloured                      490
+          fluoride      fluoride                      200
+                        fluoride abandoned             17
+          good          soft                        50818
+          milky         milky                         804
+          salty         salty                        4856
+                        salty abandoned               339
+          unknown       unknown                      1876
+\end{Verbatim}
+            
+    Again, quality\_group gives us no new information so it can be dropped.
+
+    \paragraph{quantity}\label{quantity}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 5  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{quantity\_group}\label{quantity_group}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 5  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quantity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:}                              date\_recorded
+          quantity\_group quantity                   
+          dry            dry                    6246
+          enough         enough                33186
+          insufficient   insufficient          15129
+          seasonal       seasonal               4050
+          unknown        unknown                 789
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{quantity\PYZus{}group}\PY{o}{==}\PY{n}{train}\PY{o}{.}\PY{n}{quantity}\PY{p}{)}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}173}]:} True
+\end{Verbatim}
+            
+    \texttt{quantity\_group} and \texttt{quantity} are also duplicate
+features, we can drop \texttt{quantity\_group}.
+
+    \paragraph{source}\label{source}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 10  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{source\_type}\label{source_type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}158}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 7  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{source\_class}\label{source_class}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 3  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{source}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}163}]:}                                                         date\_recorded
+          source\_class source\_type          source                             
+          groundwater  borehole             hand dtw                        874
+                                            machine dbh                   11075
+                       shallow well         shallow well                  16824
+                       spring               spring                        17021
+          surface      dam                  dam                             656
+                       rainwater harvesting rainwater harvesting           2295
+                       river/lake           lake                            765
+                                            river                          9612
+          unknown      other                other                           212
+                                            unknown                          66
+\end{Verbatim}
+            
+    \paragraph{waterpoint\_type}\label{waterpoint_type}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 7  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}166}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \paragraph{waterpoint\_type\_group}\label{waterpoint_type_group}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{n}{data\PYZus{}check}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+There are 0  null values.
+There are 6  unique values.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}168}]:} \PY{n}{plot\PYZus{}hist}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{n}{col}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}169}]:} \PY{n}{train}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date\PYZus{}recorded}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type\PYZus{}group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{waterpoint\PYZus{}type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}169}]:}                                                    date\_recorded
+          waterpoint\_type\_group waterpoint\_type                           
+          cattle trough         cattle trough                          116
+          communal standpipe    communal standpipe                   28522
+                                communal standpipe multiple           6103
+          dam                   dam                                      7
+          hand pump             hand pump                            17488
+          improved spring       improved spring                        784
+          other                 other                                 6380
+\end{Verbatim}
+            
+    At this point we saw several features that are related to each other and
+are broken down into increasing granularity. We saw this for
+\texttt{waterpoint\_type}, \texttt{source}, \texttt{water\_quality},
+\texttt{extraction\_type}, and \texttt{management}. It's unclear to me
+whether the machine learning models would perform best if I was to keep
+only the most granular features and drop the higher categories. My plan
+is to create two datasets, one that keeps all of the levels of these
+features and one that keeps only the most granular and compare their
+performance.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
