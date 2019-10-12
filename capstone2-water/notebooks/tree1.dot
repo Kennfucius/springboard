@@ -1,0 +1,33 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname=helvetica] ;
+edge [fontname=helvetica] ;
+0 [label="source_type_rainwater harvesting <= 0.5\ngini = 0.67\nsamples = 25191\nvalue = [13318.35, 13183.43, 13208.16]\nclass = functional", fillcolor="#fffefe"] ;
+1 [label="lga_Bariadi <= 0.5\ngini = 0.67\nsamples = 24248\nvalue = [12752.97, 12220.13, 12872.32]\nclass = non functional", fillcolor="#fefeff"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="water_quality_salty <= 0.5\ngini = 0.67\nsamples = 23778\nvalue = [12520.17, 11059.59, 12757.5]\nclass = non functional", fillcolor="#fefdff"] ;
+1 -> 2 ;
+3 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 3 ;
+19560 [label="(...)", fillcolor="#C0C0C0"] ;
+2 -> 19560 ;
+21461 [label="population <= 380.0\ngini = 0.38\nsamples = 470\nvalue = [232.8, 1160.55, 114.82]\nclass = functional needs repair", fillcolor="#6feca3"] ;
+1 -> 21461 ;
+21462 [label="(...)", fillcolor="#C0C0C0"] ;
+21461 -> 21462 ;
+21953 [label="(...)", fillcolor="#C0C0C0"] ;
+21461 -> 21953 ;
+22012 [label="extraction_type_group_other <= 0.5\ngini = 0.61\nsamples = 943\nvalue = [565.38, 963.3, 335.84]\nclass = functional needs repair", fillcolor="#c2f7d8"] ;
+0 -> 22012 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+22013 [label="subvillage_Nambamoja <= 0.5\ngini = 0.61\nsamples = 763\nvalue = [441.58, 811.92, 292.67]\nclass = functional needs repair", fillcolor="#bdf6d5"] ;
+22012 -> 22013 ;
+22014 [label="(...)", fillcolor="#C0C0C0"] ;
+22013 -> 22014 ;
+22987 [label="(...)", fillcolor="#C0C0C0"] ;
+22013 -> 22987 ;
+22988 [label="waterpoint_type_group_other <= 0.5\ngini = 0.6\nsamples = 180\nvalue = [123.79, 151.38, 43.17]\nclass = functional needs repair", fillcolor="#e3fbed"] ;
+22012 -> 22988 ;
+22989 [label="(...)", fillcolor="#C0C0C0"] ;
+22988 -> 22989 ;
+23122 [label="(...)", fillcolor="#C0C0C0"] ;
+22988 -> 23122 ;
+}
