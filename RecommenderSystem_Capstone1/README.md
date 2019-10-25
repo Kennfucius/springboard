@@ -10,3 +10,7 @@ The goal of this project is to build a recommendation engine to recommend practi
 ## Data Storytelling
 
 [Data Storytelling Jupyter Notebook](https://nbviewer.jupyter.org/github/Kennfucius/springboard/blob/master/RecommenderSystem_Capstone1/Data%20Storytelling.ipynb)
+
+## Final Presentation
+
+[Project Slide Deck](https://docs.google.com/presentation/d/1Irc2F3338hfVtqctX2NBy2DSAjJ55Q8kfIrL3JTAA1A/edit?usp=sharing)
